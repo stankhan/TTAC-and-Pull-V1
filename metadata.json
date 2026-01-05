@@ -1,0 +1,7 @@
+{
+  "name": "G Payment Flow - TTAC and Pull",
+  "description": "A high-fidelity simulation of a complex Google Play payment flow featuring Tap-to-Add, OCR scanning, manual entry, and bank-direct card pulling.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
