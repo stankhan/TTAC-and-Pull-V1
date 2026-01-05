@@ -1,4 +1,3 @@
-
 export enum FlowStep {
   PRODUCT_VIEW = 'PRODUCT_VIEW',
   PAYMENT_SHEET = 'PAYMENT_SHEET',
@@ -27,7 +26,8 @@ export enum EntryMode {
 
 export interface Card {
   id: string;
-  name: string;
+  name: string; // Product name (e.g. Sapphire Reserved)
+  cardholderName: string; // Person's name (e.g. Stan Li)
   pan: string;
   lastFour: string;
   expiry: string;

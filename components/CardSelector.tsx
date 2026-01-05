@@ -25,19 +25,22 @@ const CardSelector: React.FC<CardSelectorProps> = ({ bank, onConfirm, onBack }) 
   };
 
   const handleConfirm = () => {
-    const cards = bank.cards.filter(c => selectedIds.has(c.id));
+    const cards = bank.cards.map(c => ({
+        ...c,
+        cardholderName: USER_NAME // Ensure Stan Li is attached when pulled from bank
+    })).filter(c => selectedIds.has(c.id));
     onConfirm(cards);
   };
 
   return (
-    <div className="p-4 h-full flex flex-col">
+    <div className="p-4 h-full flex flex-col bg-white">
       <div className="flex items-center gap-4 mb-6">
-        <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-full">
-           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+        <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+           <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
         </button>
         <div>
-          <h2 className="text-xl font-bold">Select cards</h2>
-          <p className="text-xs text-gray-500">Add from {bank.name}</p>
+          <h2 className="text-xl font-bold text-gray-900">Select cards</h2>
+          <p className="text-xs text-gray-500 font-medium">Add from {bank.name}</p>
         </div>
       </div>
 
@@ -53,7 +56,7 @@ const CardSelector: React.FC<CardSelectorProps> = ({ bank, onConfirm, onBack }) 
               <p className="font-bold text-sm text-gray-800">
                 {card.bank} {card.name} {getCardBrand(card.pan)}**{card.lastFour}
               </p>
-              <p className="text-xs text-gray-500">{USER_NAME}</p>
+              <p className="text-xs text-gray-500 font-medium">{USER_NAME}</p>
               <p className="text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-tighter">Secure Link: Active</p>
             </div>
             <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${selectedIds.has(card.id) ? 'bg-blue-600 border-blue-600' : 'border-gray-300'}`}>
@@ -67,7 +70,7 @@ const CardSelector: React.FC<CardSelectorProps> = ({ bank, onConfirm, onBack }) 
         <button
           disabled={selectedIds.size === 0}
           onClick={handleConfirm}
-          className="w-full py-3 bg-blue-700 disabled:bg-gray-300 text-white font-bold rounded-full shadow-lg"
+          className="w-full py-3 bg-blue-700 disabled:bg-gray-300 text-white font-bold rounded-full shadow-lg transition-colors"
         >
           Add {selectedIds.size} {selectedIds.size === 1 ? 'card' : 'cards'} to Google Account
         </button>

@@ -82,78 +82,82 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
       case FlowStep.PAYMENT_SHEET:
         return (
           <div className="p-4 animate-in slide-in-from-bottom duration-300">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6 pt-2">
               <h2 className="text-xl font-bold text-gray-900">Google Play</h2>
-              <button onClick={handleClose} className="p-2 hover:bg-gray-100 rounded-full">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+              <button onClick={handleClose} className="p-1 hover:bg-gray-100 rounded-full transition-colors">
+                <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
 
-            <div className="flex items-center gap-4 mb-6 pb-6 border-b">
-              <img src="https://picsum.photos/id/1/100/100" className="w-12 h-12 rounded-lg" alt="App" />
+            <div className="flex items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+              <img src="https://picsum.photos/id/1/100/100" className="w-14 h-14 rounded-lg shadow-sm" alt="App" />
               <div className="flex-1">
-                <p className="font-semibold text-gray-800">Pixel Master Pro Subscription</p>
-                <p className="text-sm text-gray-500">Monthly Plan</p>
+                <p className="font-bold text-gray-900 text-[15px]">Pixel Master Pro Subscription</p>
+                <p className="text-sm text-gray-500 font-medium">Monthly Plan</p>
               </div>
-              <p className="font-bold text-gray-900">$9.99</p>
+              <p className="font-bold text-gray-900 text-lg">$9.99</p>
             </div>
 
-            {addedCards.length === 0 ? (
-              <button 
-                onClick={onAddCard}
-                className="w-full flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors border border-dashed border-gray-300"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-100 flex items-center justify-center rounded-full text-green-700">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
-                  </div>
-                  <span className="font-medium">Add payment method</span>
-                </div>
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              </button>
-            ) : (
-              <div className="space-y-4 mb-6">
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Payment Method</p>
-                {addedCards.map(card => (
-                  <button
-                    key={card.id}
-                    onClick={() => setSelectedCardId(card.id)}
-                    className={`w-full flex items-center gap-4 p-3 rounded-xl border-2 transition-all ${selectedCardId === card.id ? 'border-green-600 bg-green-50' : 'border-gray-200 hover:border-gray-300'}`}
-                  >
-                    <img src={card.cardArt} className="w-16 h-10 rounded shadow-sm object-cover" alt="Card Art" />
-                    <div className="flex-1 text-left">
-                      <p className="font-semibold text-sm">
-                        {card.bank ? `${card.bank} ` : ''}{card.name} {getCardBrand(card.pan)}**{card.lastFour}
-                      </p>
-                      <p className="text-xs text-gray-500">{USER_NAME}</p>
-                    </div>
-                    {selectedCardId === card.id && (
-                      <div className="w-5 h-5 bg-green-600 rounded-full flex items-center justify-center text-white">
-                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
-                      </div>
-                    )}
-                  </button>
-                ))}
+            <div className="mb-4">
+              <p className="text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-3">Payment Method</p>
+              
+              {addedCards.length === 0 ? (
                 <button 
                   onClick={onAddCard}
-                  className="w-full py-2 text-green-700 text-sm font-semibold flex items-center justify-center gap-1"
+                  className="w-full flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-all border border-dashed border-gray-300"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
-                  Add another card
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-green-100 flex items-center justify-center rounded-full text-green-700">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                    </div>
+                    <span className="font-bold text-gray-700">Add payment method</span>
+                  </div>
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </button>
-              </div>
-            )}
+              ) : (
+                <div className="space-y-3">
+                  {addedCards.map(card => (
+                    <button
+                      key={card.id}
+                      onClick={() => setSelectedCardId(card.id)}
+                      className={`w-full flex items-center gap-4 p-3.5 rounded-[1.25rem] border-2 transition-all ${selectedCardId === card.id ? 'border-[#137333] bg-[#f1f8f5]' : 'border-gray-100 bg-white hover:border-gray-200'}`}
+                    >
+                      <img src={card.cardArt} className="w-14 h-9 rounded-md shadow-sm object-cover bg-gray-200" alt="Card" />
+                      <div className="flex-1 text-left">
+                        <p className="font-bold text-sm text-gray-900">
+                          {card.bank ? `${card.bank} ` : ''}{card.name} {getCardBrand(card.pan)}**{card.lastFour}
+                        </p>
+                        <p className="text-xs text-gray-500 font-medium">{card.cardholderName || USER_NAME}</p>
+                      </div>
+                      {selectedCardId === card.id && (
+                        <div className="w-6 h-6 bg-[#137333] rounded-full flex items-center justify-center text-white shadow-sm">
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3.5} d="M5 13l4 4L19 7" /></svg>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                  
+                  <button 
+                    onClick={onAddCard}
+                    className="w-full py-4 text-[#137333] text-sm font-bold flex items-center justify-center gap-2 transition-colors hover:bg-gray-50 rounded-xl"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" /></svg>
+                    Add another card
+                  </button>
+                </div>
+              )}
+            </div>
 
-            <div className="mt-8">
+            <div className="mt-10">
               <button 
                 disabled={!selectedCardId}
                 onClick={onPay}
-                className="w-full py-3 bg-green-700 disabled:bg-gray-300 text-white font-bold rounded-full shadow-lg transition-all"
+                className="w-full py-4 bg-[#137333] disabled:bg-gray-300 text-white font-bold rounded-full shadow-lg transition-all active:scale-[0.98] text-lg"
               >
-                1-tap Buy
+                Buy
               </button>
-              <p className="text-[10px] text-gray-400 text-center mt-3 px-6">
-                By clicking "1-tap Buy", you agree to the Google Play Terms of Service.
+              <p className="text-[11px] text-gray-400 text-center mt-4 px-8 leading-relaxed font-medium">
+                By clicking "Buy", you agree to the Google Play Terms of Service.
               </p>
             </div>
           </div>
@@ -172,10 +176,10 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
         return (
           <div className="flex flex-col h-full animate-in fade-in duration-500 bg-white">
              <div className="flex items-center gap-4 p-4 border-b">
-                <button onClick={() => setStep(FlowStep.ADD_CARD_MENU)} className="p-2 hover:bg-gray-100 rounded-full">
+                <button onClick={() => setStep(FlowStep.ADD_CARD_MENU)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                    <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 </button>
-                <h2 className="text-xl font-bold">Tap to add</h2>
+                <h2 className="text-xl font-bold text-gray-900">Tap to add</h2>
              </div>
              
              <div className="flex-1 flex flex-col items-center justify-center p-8">
@@ -202,7 +206,7 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
 
              <div className="p-6 bg-gray-50 border-t space-y-4">
                 <button 
-                   onClick={() => onCardIdentified({ id: 'tap1', name: 'Freedom', pan: '4111 2222 3333 7777', lastFour: '7777', expiry: '07/28', cardArt: 'https://picsum.photos/id/201/300/180', bank: 'Chase' })}
+                   onClick={() => onCardIdentified({ id: 'tap1', name: 'Freedom', cardholderName: USER_NAME, pan: '4111 2222 3333 7777', lastFour: '7777', expiry: '07/28', cardArt: 'https://picsum.photos/id/201/300/180', bank: 'Chase' })}
                    className="w-full py-4 bg-green-700 text-white font-bold rounded-full shadow-lg hover:bg-green-800 transition-colors"
                 >
                   Confirm Card Read
@@ -249,7 +253,7 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
              
              <div className="w-full p-6 pb-10 space-y-4">
                <button 
-                  onClick={() => onCardIdentified({ id: 'cam1', name: 'Sapphire Reserved', pan: '4111 1111 0000 1234', lastFour: '1234', expiry: '05/29', cardArt: 'https://picsum.photos/id/202/300/180', bank: 'Chase' })}
+                  onClick={() => onCardIdentified({ id: 'cam1', name: 'Sapphire Reserved', cardholderName: USER_NAME, pan: '4111 1111 0000 1234', lastFour: '1234', expiry: '05/29', cardArt: 'https://picsum.photos/id/202/300/180', bank: 'Chase' })}
                   className="w-full py-4 bg-white text-black rounded-full font-bold shadow-lg"
                >
                  Capture Details
@@ -265,7 +269,7 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
         return (
           <div className="h-full flex flex-col items-center justify-center p-8 animate-in fade-in bg-white">
             <div className="w-16 h-16 border-4 border-green-700 border-t-transparent rounded-full animate-spin mb-6"></div>
-            <h2 className="text-xl font-bold mb-2">Contacting your bank</h2>
+            <h2 className="text-xl font-bold mb-2 text-gray-900">Contacting your bank</h2>
             <p className="text-gray-500 text-center">We're verifying your card details and security with your financial institution.</p>
           </div>
         );
@@ -274,7 +278,7 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
         return (
           <div className="p-6 h-full bg-white flex flex-col">
             <div className="flex-1">
-              <h2 className="text-2xl font-bold mb-6">Confirm Billing Address</h2>
+              <h2 className="text-2xl font-bold mb-6 text-gray-900">Confirm Billing Address</h2>
               <p className="text-gray-500 mb-8 leading-relaxed">Your bank shared this address for payment verification.</p>
               
               <div className="bg-gray-50 p-6 rounded-2xl mb-8 border border-gray-100 shadow-sm">
@@ -306,12 +310,12 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
                   <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
               </div>
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Card saved!</h2>
-              <p className="text-gray-600 mb-8 px-4 leading-relaxed">
+              <p className="text-gray-600 mb-8 px-4 leading-relaxed font-medium">
                 Congratulations, your card has already been saved to your Google account.
               </p>
 
               <div className="bg-gray-50 rounded-[2rem] p-6 space-y-6 text-left border border-gray-100 shadow-sm mb-8">
-                <h3 className="text-sm font-bold text-gray-800 uppercase tracking-widest text-center border-b pb-4 mb-4">Why verify your card?</h3>
+                <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center border-b border-gray-200 pb-4 mb-4">Why verify your card?</h3>
                 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-green-600 shadow-sm flex-shrink-0">
@@ -319,7 +323,7 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
                   </div>
                   <div>
                     <p className="font-bold text-gray-900 text-sm">Express Checkout</p>
-                    <p className="text-xs text-gray-500">Fast and secure 1-tap purchases with your biometrics.</p>
+                    <p className="text-xs text-gray-500 font-medium">Fast and secure 1-tap purchases with your biometrics.</p>
                   </div>
                 </div>
 
@@ -329,7 +333,7 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
                   </div>
                   <div>
                     <p className="font-bold text-gray-900 text-sm">Offline Tap & Pay</p>
-                    <p className="text-xs text-gray-500">Use your phone to pay in stores anywhere contactless is accepted.</p>
+                    <p className="text-xs text-gray-500 font-medium">Use your phone to pay in stores anywhere contactless is accepted.</p>
                   </div>
                 </div>
 
@@ -339,7 +343,7 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
                   </div>
                   <div>
                     <p className="font-bold text-gray-900 text-sm">No verification needed later</p>
-                    <p className="text-xs text-gray-500">Skip the 3DS verification steps for all future transactions.</p>
+                    <p className="text-xs text-gray-500 font-medium">Skip the 3DS verification steps for all future transactions.</p>
                   </div>
                 </div>
               </div>
@@ -371,8 +375,8 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
              <div className="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-8">
                 <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.952 11.952 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
              </div>
-             <h2 className="text-2xl font-bold mb-4">Successfully Verified</h2>
-             <p className="text-gray-600 mb-12 leading-relaxed">Your card is now tokenized and ready for 1-tap checkouts and tap & pay in stores.</p>
+             <h2 className="text-2xl font-bold mb-4 text-gray-900">Successfully Verified</h2>
+             <p className="text-gray-600 mb-12 leading-relaxed font-medium">Your card is now tokenized and ready for 1-tap checkouts and tap & pay in stores.</p>
              <button onClick={onFinishAdd} className="w-full py-4 bg-green-700 text-white font-bold rounded-full shadow-lg">Return to purchase</button>
           </div>
         );
@@ -380,8 +384,8 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
       case FlowStep.DO_LATER_SUCCESS:
         return (
           <div className="p-6 h-full bg-white flex flex-col">
-            <h2 className="text-2xl font-bold mb-4">Set up for later</h2>
-            <p className="text-gray-600 mb-8 leading-relaxed">We'll automatically send a reminder to finish verification to your signed-in devices:</p>
+            <h2 className="text-2xl font-bold mb-4 text-gray-900">Set up for later</h2>
+            <p className="text-gray-600 mb-8 leading-relaxed font-medium">We'll automatically send a reminder to finish verification to your signed-in devices:</p>
             <div className="space-y-4 mb-10 flex-1">
               {DEVICES.map(device => (
                 <div key={device} className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 shadow-sm">
@@ -392,7 +396,7 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
                 </div>
               ))}
               <div className="mt-8 p-6 bg-blue-50 rounded-2xl border border-blue-100 shadow-sm">
-                 <p className="text-sm text-blue-800 leading-relaxed">
+                 <p className="text-sm text-blue-800 leading-relaxed font-medium">
                    We've sent an <b>education email</b> to your mailbox with instructions on how to manually finish this flow anytime.
                  </p>
               </div>
@@ -405,17 +409,17 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
         return (
           <div className="p-6 h-full flex flex-col bg-white animate-in fade-in duration-500">
             <div className="flex items-center gap-2 mb-10">
-               <img src={selectedBank?.logo} className="w-8 h-8 rounded" alt="Logo" />
-               <span className="font-bold text-lg">{selectedBank?.name} Login</span>
+               <img src={selectedBank?.logo} className="w-8 h-8 rounded shadow-sm" alt="Logo" />
+               <span className="font-bold text-lg text-gray-900">{selectedBank?.name} Login</span>
             </div>
             <div className="flex-1 space-y-6">
               <div className="space-y-1">
-                 <label className="text-xs font-bold text-gray-500 uppercase">Username</label>
-                 <div className="p-4 bg-gray-50 border border-gray-100 rounded-xl text-gray-400 font-medium">stanli_creative</div>
+                 <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider ml-1">Username</label>
+                 <div className="p-4 bg-gray-50 border border-gray-100 rounded-xl text-gray-900 font-bold">stanli_creative</div>
               </div>
               <div className="space-y-1">
-                 <label className="text-xs font-bold text-gray-500 uppercase">Password</label>
-                 <div className="p-4 bg-gray-50 border border-gray-100 rounded-xl text-gray-400 font-medium">••••••••••••</div>
+                 <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider ml-1">Password</label>
+                 <div className="p-4 bg-gray-50 border border-gray-100 rounded-xl text-gray-900 font-bold tracking-widest">••••••••••••</div>
               </div>
               <div className="flex flex-col items-center justify-center p-10 bg-blue-50 rounded-[2rem] border-2 border-dashed border-blue-200">
                  <div className="text-center">
@@ -426,7 +430,7 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
             </div>
             <button 
               onClick={() => setStep(FlowStep.BANK_CARD_SELECTOR)}
-              className="w-full py-4 bg-blue-700 text-white font-bold rounded-full mt-auto shadow-lg"
+              className="w-full py-4 bg-blue-700 text-white font-bold rounded-full mt-auto shadow-lg hover:bg-blue-800 transition-colors"
             >
               Sign In
             </button>
@@ -445,8 +449,8 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
       case FlowStep.ORDER_COMPLETE:
         return (
           <div className="p-10 flex flex-col items-center justify-center h-full text-center bg-white">
-             <div className="w-24 h-24 bg-green-500 text-white rounded-full flex items-center justify-center mb-8 shadow-2xl animate-bounce">
-                <svg className="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+             <div className="w-24 h-24 bg-[#137333] text-white rounded-full flex items-center justify-center mb-8 shadow-2xl animate-bounce">
+                <svg className="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3.5} d="M5 13l4 4L19 7" /></svg>
              </div>
              <h2 className="text-3xl font-bold text-gray-900 mb-4">Payment Success!</h2>
              <button onClick={handleClose} className="w-full py-4 border-2 border-gray-200 text-gray-800 font-bold rounded-full hover:bg-gray-50 transition-colors">Finish</button>
@@ -466,10 +470,10 @@ const PaymentSheet: React.FC<PaymentSheetProps> = ({
       />
       <div 
         className={`w-full bg-white relative shadow-2xl transition-all duration-300 transform 
-          ${isFullScreenFlow ? 'h-full translate-y-0 rounded-none' : 'rounded-t-[2rem] max-h-[92%] translate-y-0'}
+          ${isFullScreenFlow ? 'h-full translate-y-0 rounded-none' : 'rounded-t-[2.5rem] max-h-[95%] translate-y-0'}
           ${closing ? 'translate-y-full opacity-0 scale-95' : 'translate-y-0 opacity-100 scale-100'}`}
       >
-        {!isFullScreenFlow && <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto my-3" />}
+        {!isFullScreenFlow && <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto my-3" />}
         {renderContent()}
       </div>
     </div>
